@@ -1,0 +1,75 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+  xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+                      http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd
+                      http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+
+  <changeSet author="user (generated)" id="00.0.00-1">
+    <createTable tableName="tipo_identificador">
+      <column name="id" type="VARCHAR(255)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="tipo_identificadorPK" />
+      </column>
+      <column name="nombre" type="VARCHAR(255)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+
+  <changeSet author="user (generated)" id="00.01.00-2">
+    <createTable tableName="empresa">
+      <column name="id" type="VARCHAR(255)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="empresaPK" />
+      </column>
+      <column name="datos_economicos" type="BOOLEAN">
+        <constraints nullable="false" />
+      </column>
+      <column name="nombre" type="VARCHAR(255)">
+        <constraints nullable="false" />
+      </column>
+      <column name="numero_identificacion" type="VARCHAR(255)">
+        <constraints nullable="false" />
+      </column>
+      <column name="padre_id" type="VARCHAR(255)" />
+      <column name="razon_social" type="VARCHAR(255)">
+        <constraints nullable="false" />
+      </column>
+      <column name="tipo_identificador_id" type="VARCHAR(255)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+
+    <addForeignKeyConstraint baseColumnNames="padre_id" baseTableName="empresa"
+      constraintName="FK_EMPRESA_PADRE" deferrable="false" initiallyDeferred="false"
+      referencedColumnNames="id" referencedTableName="empresa" validate="true" />
+    <addForeignKeyConstraint baseColumnNames="tipo_identificador_id" baseTableName="empresa"
+      constraintName="FK_EMPRESA_TIPO_IDENTIFICADOR" deferrable="false" initiallyDeferred="false"
+      referencedColumnNames="id" referencedTableName="tipo_identificador" validate="true" />
+  </changeSet>
+
+  <changeSet author="user (generated)" id="00.01.00-3">
+    <createTable tableName="datos_contacto">
+      <column name="empresa_id" type="VARCHAR(255)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="datos_contactoPK" />
+      </column>
+      <column name="direccion" type="VARCHAR(255)">
+        <constraints nullable="false" />
+      </column>
+      <column name="pais_ref" type="VARCHAR(3)"></column>
+      <column name="comunidad_autonoma_ref" type="VARCHAR(2)"></column>
+      <column name="provincia_ref" type="VARCHAR(2)"></column>
+      <column name="ciudad" type="VARCHAR(255)"></column>
+      <column name="codigo_postal" type="VARCHAR(5)"></column>
+      <column name="emails" type="VARCHAR(255)"></column>
+      <column name="telefonos" type="VARCHAR(255)"></column>
+    </createTable>
+
+    <addForeignKeyConstraint baseColumnNames="empresa_id" baseTableName="datos_contacto"
+      constraintName="FK_DATOSCONTACTO_EMPRESA" deferrable="false" initiallyDeferred="false"
+      referencedColumnNames="id" referencedTableName="empresa" validate="true" />
+  </changeSet>
+
+</databaseChangeLog>
