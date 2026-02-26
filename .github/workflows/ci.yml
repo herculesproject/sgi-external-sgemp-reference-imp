@@ -82,7 +82,6 @@ jobs:
     needs: build
     uses: herculesproject/sgi/.github/workflows/update-sgi-deploy-repo.yml@ci
     with:
-      service-name: 'sgi-external-sgemp-reference-imp'
-      service-version: ${{ needs.build.outputs.VERSION }}
+      changed-modules: 'SGEMP'
       sha: ${{ github.sha }}
     secrets: inherit
