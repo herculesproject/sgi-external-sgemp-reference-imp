@@ -12,7 +12,7 @@
 
   <groupId>io.github.herculesproject.sgi</groupId>
   <artifactId>sgi-external-sgemp-reference-imp</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0</version>
   <name>sgi-external-sgemp-reference-imp</name>
   <description>Reference implementation of external SGEMP service</description>
 
